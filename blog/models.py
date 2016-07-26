@@ -12,7 +12,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
 
-class Post(Page):
+class PostPage(Page):
     post_cover = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
