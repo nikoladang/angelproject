@@ -2,12 +2,39 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey
 
-# Create your models here.
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel)
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel, StreamFieldPanel)
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
+
+
+class Post(Page):
+    post_cover = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
+    date = models.DateField("Post date")
+    author = models.CharField(max_length=255)
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('media', EmbedBlock())
+    ])
+
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('post_cover'),
+        FieldPanel('date'),
+        FieldPanel('author'),
+        StreamFieldPanel('body'),
+    ]
 
 
 class BlogPage(Page):
@@ -34,6 +61,21 @@ class BlogPage(Page):
         FieldPanel('body', classname="full"),
     ]
 
+
+class StreamBlogPage(Page):
+    author = models.CharField(max_length=255, blank=True)
+    date = models.DateField("Post date", blank=True)
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ], blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('author'),
+        FieldPanel('date'),
+        StreamFieldPanel('body'),
+    ]
 
 # class BlogIndex(Page):
 #     intro = RichTextField(blank=True)
