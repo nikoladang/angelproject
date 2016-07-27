@@ -28,12 +28,14 @@ class PostPage(Page):
         ('image', ImageChooserBlock()),
         ('media', EmbedBlock())
     ])
+    note = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('post_cover'),
         FieldPanel('date'),
         FieldPanel('author'),
         StreamFieldPanel('body'),
+        FieldPanel('note', classname="full"),
     ]
 
 
