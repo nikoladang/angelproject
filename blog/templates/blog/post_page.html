@@ -5,7 +5,7 @@
 {% block body_class %}template-postpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1> <!--TODO title url unicode http://docs.wagtail.io/en/latest/releases/1.6.html#unicode-page-slugs -->
+    <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
     <article>
         {% for block in page.body %}
@@ -15,7 +15,7 @@
             {% elif block.block_type == "paragraph" %}
                 <div class="post-paragraph">{{ block.value }}</div>
             {% elif block.block_type == "image" %}
-                <div class="image-cover">{% image block.value width-400 %}</div>
+                <div class="post-image-cover">{% image block.value width-400 %}</div> <!--TODO make image responsive -->
             {% elif block.block_type == "media" %}
                 <div class="post-media">{{ block.value }}</div>
             {% else %}

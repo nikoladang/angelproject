@@ -12,6 +12,24 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
 
+class PostIndexPage(Page):
+    note = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('note', classname="full"),
+    ]
+
+    subpage_types = ['blog.PostPage']
+
+    def posts(self):
+        # posts_index = PostIndexPage.objects.all().last()
+        # print(posts_index.get_children())
+        posts = PostPage.objects.live().descendant_of(self)
+        posts = posts.order_by("-date")
+        print(posts)
+        return posts
+
+
 class PostPage(Page):
     post_cover = models.ForeignKey(
         'wagtailimages.Image',
@@ -37,6 +55,8 @@ class PostPage(Page):
         StreamFieldPanel('body'),
         FieldPanel('note', classname="full"),
     ]
+
+    parent_page_types = ['blog.PostIndexPage']
 
 
 class BlogPage(Page):

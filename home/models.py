@@ -9,16 +9,16 @@ from blog.models import PostPage
 
 
 class HomePage(Page):
-    body = RichTextField(blank=False)
+    body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full")
     ]
 
     def post_pages(self):
-        # print("xzxxx")
         # print(PostPage.objects.all())
-        return PostPage.objects.live()
+        return PostPage.objects.live().order_by("-date")
+
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super(PostPage, self).get_context(request)

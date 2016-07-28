@@ -18,7 +18,7 @@
     <!--TODO link from home to post -->
     {{ page.title }}<br>
     {{ page.owner }}<br>
-    {% for post in page.post_pages %}
+    {% for post in page.posts %}
         {{ post.title }}
         {% image post.post_cover width-400 %}
         <br>
