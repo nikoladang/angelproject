@@ -30,15 +30,23 @@ class PostIndexPage(Page):
         print(posts)
         return posts
 
+
     def paginator_posts(self):
         paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
         pagin_posts = paginator.page(1)
         print(pagin_posts)
         # if pagin_posts.has_previous():
-        #     print("previous")
-        # if pagin_posts.has_next():
-        #     print("next")
+        #     print("previous"))
+        if pagin_posts.has_next():
+            print("next")
         return pagin_posts
+
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+        print(self.title)
+        print("Inside context")
+        return context
 
 
 class PostPage(Page):
