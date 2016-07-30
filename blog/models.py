@@ -10,6 +10,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
+from django.core.paginator import Paginator
 
 
 class PostIndexPage(Page):
@@ -28,6 +29,16 @@ class PostIndexPage(Page):
         posts = posts.order_by("-date")
         print(posts)
         return posts
+
+    def paginator_posts(self):
+        paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
+        pagin_posts = paginator.page(1)
+        print(pagin_posts)
+        # if pagin_posts.has_previous():
+        #     print("previous")
+        # if pagin_posts.has_next():
+        #     print("next")
+        return pagin_posts
 
 
 class PostPage(Page):

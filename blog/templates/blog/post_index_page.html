@@ -18,10 +18,26 @@
     <!--TODO link from home to post -->
     {{ page.title }}<br>
     {{ page.owner }}<br>
-    {% for post in page.posts %}
+{#    {% for post in page.posts %}#}
+    {% for post in page.paginator_posts %}
         {{ post.title }}
         {% image post.post_cover width-400 %}
         <br>
     {% endfor %}
+
     {{ page.body|richtext }}
+
+{#    <div class="pagination">#}
+{#        <span class="step-links">#}
+{#            {% if page.paginator_posts.has_previous %}#}
+{#                <a href="?page={{ page.paginator_posts.previous_page_number }}">previous</a>#}
+{#            {% endif %}#}
+{#            <span class="current">#}
+{#                Page {{ page.paginator_posts.number }} of {{ page.paginator_posts.num_pages }}#}
+{#            </span>#}
+{#            {% if page.paginator_posts.has_next %}#}
+{#                <a href="?page{{ contacts.next_page_number }}">next</a>#}
+{#            {% endif %}#}
+{#        </span>#}
+{#    </div>#}
 {% endblock %}
