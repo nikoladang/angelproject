@@ -19,7 +19,7 @@
     {{ page.title }}<br>
     {{ page.owner }}<br>
 {#    {% for post in page.posts %}#}
-    {% for post in page.paginator_posts %}
+    {% for post in paginated_posts %}
         {{ post.title }}
         {% image post.post_cover width-400 %}
         <br>

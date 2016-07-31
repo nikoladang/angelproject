@@ -10,7 +10,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class PostIndexPage(Page):
@@ -31,20 +31,46 @@ class PostIndexPage(Page):
         return posts
 
 
-    def paginator_posts(self):
+    # def post_paginator(self, pagenumber):
+    #     #https://docs.djangoproject.com/en/1.9/topics/pagination/
+    #     paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
+    #     pagin_posts = paginator.page(1)
+    #     print(pagin_posts)
+    #     # if pagin_posts.has_previous():
+    #     #     print("previous"))
+    #     if pagin_posts.has_next():
+    #         print("next")
+    #     return pagin_posts
+
+    def post_paginator(self, pagenumber):
         paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
-        pagin_posts = paginator.page(1)
-        print(pagin_posts)
+        # pagin_posts = paginator.page(1)
+        # print(pagin_posts)
         # if pagin_posts.has_previous():
         #     print("previous"))
-        if pagin_posts.has_next():
-            print("next")
-        return pagin_posts
+
+        # if pagin_posts.has_next():
+        #     print("next")
+
+        try:
+            pagination_posts = paginator.page(pagenumber)
+        except PageNotAnInteger:
+            pagination_posts = paginator.page(1)
+            pass
+        except EmptyPage:
+            pagination_posts = paginator.page(paginator.num_pages)
+        # print(pagination_posts)
+        return pagination_posts
 
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request)
+        page = request.GET.get('page')
+        print(page)
+        paginated_posts = self.post_paginator(page)
         print(self.title)
+        print(paginated_posts)
+        context['paginated_posts'] = paginated_posts
         print("Inside context")
         return context
 
