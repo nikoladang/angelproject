@@ -20,24 +20,23 @@
     {{ page.owner }}<br>
 {#    {% for post in page.posts %}#}
     {% for post in paginated_posts %}
-        {{ post.title }}
-        {% image post.post_cover width-400 %}
-        <br>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>  <br>
+        {% image post.post_cover width-400 %}   <br>
     {% endfor %}
 
     {{ page.body|richtext }}
 
-{#    <div class="pagination">#}
-{#        <span class="step-links">#}
-{#            {% if page.paginator_posts.has_previous %}#}
-{#                <a href="?page={{ page.paginator_posts.previous_page_number }}">previous</a>#}
-{#            {% endif %}#}
-{#            <span class="current">#}
-{#                Page {{ page.paginator_posts.number }} of {{ page.paginator_posts.num_pages }}#}
-{#            </span>#}
-{#            {% if page.paginator_posts.has_next %}#}
-{#                <a href="?page{{ contacts.next_page_number }}">next</a>#}
-{#            {% endif %}#}
-{#        </span>#}
-{#    </div>#}
-{% endblock %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if paginated_posts.has_previous %}
+                <a href="?page={{ paginated_posts.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ paginated_posts.number }} of {{ paginated_posts.paginator.num_pages }}
+            </span>
+            {% if paginated_posts.has_next %}
+                <a href="?page={{ paginated_posts.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock content%}

@@ -56,7 +56,6 @@ class PostIndexPage(Page):
             pagination_posts = paginator.page(pagenumber)
         except PageNotAnInteger:
             pagination_posts = paginator.page(1)
-            pass
         except EmptyPage:
             pagination_posts = paginator.page(paginator.num_pages)
         # print(pagination_posts)
