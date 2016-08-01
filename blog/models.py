@@ -43,7 +43,9 @@ class PostIndexPage(Page):
     #     return pagin_posts
 
     def post_paginator(self, pagenumber):
-        paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
+        posts = PostPage.objects.live().descendant_of(self)
+        posts = posts.order_by("-date")
+        paginator = Paginator(posts, 5)
         # pagin_posts = paginator.page(1)
         # print(pagin_posts)
         # if pagin_posts.has_previous():
@@ -80,7 +82,7 @@ class PostPage(Page):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="+"
+        related_name="+",
     )
     date = models.DateField("Post date")
     author = models.CharField(max_length=255)
