@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/angelproject.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'common/css/angelproject.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -25,8 +25,14 @@
 
         {% block content %}{% endblock %}
 
+
+      <div id="footer">
+        <div id="copyright">COPYRIGHT © 2016 boMb01. ALL RIGHTS RESERVED.</div>
+      <!-- /#footer --></div>
+      <a id="back_to_top" title="回頁頂" style="display: inline;"></a>
+
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/angelproject.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/js/angelproject.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

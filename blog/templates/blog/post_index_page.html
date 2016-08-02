@@ -13,9 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title></title>
 <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static "postindexpage/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static "common/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="{% static "fontawesome463/css/font-awesome.min.css" %}">
-<script src="{% static "js/jquery-3.1.0.min.js" %}"></script>
+<script src="{% static "common/js/jquery-3.1.0.min.js" %}"></script>
 <script>
   $(function(){$.fn.scrollToTop=function(){$(this).hide().removeAttr("href");if($(window).scrollTop()!="0"){$(this).fadeIn("")}var scrollDiv=$(this);$(window).scroll(function(){if($(window).scrollTop()=="0"){$(scrollDiv).fadeOut("")}else{$(scrollDiv).fadeIn("")}});$(this).click(function(){$("html, body").animate({scrollTop:0},"")})}});$(function(){$("#back_to_top").scrollToTop();});
 </script>
@@ -25,12 +25,12 @@
   <div class="logo_areas clearfix">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
       <div id="logo">
-        <a href="/"><img class="center_block img-responsive" src="{% static "postindexpage/img/logo.png" %}"></a>
+        <a href="/"><img class="center_block img-responsive" src="{% static "common/img/logo.png" %}"></a>
       <!-- /#logo --></div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
       <div class="text-center hidden-xs">
-        <img class="adv" src="{% static "postindexpage/img/img-ad.png" %}">
+        <img class="adv" src="{% static "common/img/img-ad.png" %}">
       <!-- /.text-center --></div>
     </div>
   <!-- /.logo_areas --></div>
