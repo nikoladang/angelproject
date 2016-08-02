@@ -1,26 +1,18 @@
+{% extends "base.html" %}
+
 {% load static from staticfiles %}
 
 {% load wagtailimages_tags%}
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="copyright" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title></title>
-<link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static "common/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
-<link rel="stylesheet" href="{% static "fontawesome463/css/font-awesome.min.css" %}">
-<script src="{% static "common/js/jquery-3.1.0.min.js" %}"></script>
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_head %}
 <script>
   $(function(){$.fn.scrollToTop=function(){$(this).hide().removeAttr("href");if($(window).scrollTop()!="0"){$(this).fadeIn("")}var scrollDiv=$(this);$(window).scroll(function(){if($(window).scrollTop()=="0"){$(scrollDiv).fadeOut("")}else{$(scrollDiv).fadeIn("")}});$(this).click(function(){$("html, body").animate({scrollTop:0},"")})}});$(function(){$("#back_to_top").scrollToTop();});
 </script>
-</head>
-<body>
+{% endblock extra_head %}
+
+{% block content %}
 <div class="container border">
   <div class="logo_areas clearfix">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
@@ -71,10 +63,5 @@
     </div>
 
   <!-- /#wrapper --></div>
-  <div id="footer">
-    <div id="copyright">COPYRIGHT © 2016 boMb01. ALL RIGHTS RESERVED.</div>
-  <!-- /#footer --></div>
-  <a id="back_to_top" title="回頁頂" style="display: inline;"></a>
 <!-- /.container --></div>
-</body>
-</html>
+{% endblock content %}

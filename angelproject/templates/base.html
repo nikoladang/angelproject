@@ -9,13 +9,26 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+{#        <meta name="description" content="" />#}
+{#        <meta name="viewport" content="width=device-width, initial-scale=1" />#}
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="copyright" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'common/css/angelproject.css' %}">
+        <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
+        <link rel="stylesheet" href="{% static "fontawesome463/css/font-awesome.min.css" %}">
+        <script src="{% static "common/js/jquery-3.1.0.min.js" %}"></script>
+        <link href="{% static "common/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
 
         {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+
+        {% block extra_head %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
     </head>
