@@ -31,17 +31,6 @@ class PostIndexPage(Page):
         return posts
 
 
-    # def post_paginator(self, pagenumber):
-    #     #https://docs.djangoproject.com/en/1.9/topics/pagination/
-    #     paginator = Paginator(PostPage.objects.live().descendant_of(self), 3)
-    #     pagin_posts = paginator.page(1)
-    #     print(pagin_posts)
-    #     # if pagin_posts.has_previous():
-    #     #     print("previous"))
-    #     if pagin_posts.has_next():
-    #         print("next")
-    #     return pagin_posts
-
     def post_paginator(self, pagenumber):
         posts = PostPage.objects.live().descendant_of(self)
         posts = posts.order_by("-date")
@@ -60,7 +49,6 @@ class PostIndexPage(Page):
             pagination_posts = paginator.page(1)
         except EmptyPage:
             pagination_posts = paginator.page(paginator.num_pages)
-        # print(pagination_posts)
         return pagination_posts
 
 
@@ -69,10 +57,9 @@ class PostIndexPage(Page):
         page = request.GET.get('page')
         print(page)
         paginated_posts = self.post_paginator(page)
-        print(self.title)
-        print(paginated_posts)
+        # print(self.title)
+        # print(paginated_posts)
         context['paginated_posts'] = paginated_posts
-        print("Inside context")
         return context
 
 
@@ -86,6 +73,8 @@ class PostPage(Page):
     )
     date = models.DateField("Post date")
     author = models.CharField(max_length=255)
+    # hot = models.NullBooleanField(blank=True, null=True)
+    hot = models.BooleanField(default=False)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
@@ -98,11 +87,37 @@ class PostPage(Page):
         ImageChooserPanel('post_cover'),
         FieldPanel('date'),
         FieldPanel('author'),
+        FieldPanel('hot'),
         StreamFieldPanel('body'),
         FieldPanel('note', classname="full"),
     ]
 
     parent_page_types = ['blog.PostIndexPage']
+
+    def latest_posts(self):
+        postindexpage = PostIndexPage.objects.all().last()
+        # posts = PostPage.objects.live().descendant_of(postindexpage)
+        posts = PostPage.objects.child_of(postindexpage)
+        posts = posts.order_by("-date")
+        posts = posts[:6]
+        return posts
+
+
+    def hottest_posts(self):
+        posts = PostPage.objects.live().public().filter(hot=True)
+        posts = posts.order_by("-date")
+        posts = posts[:4]
+        return posts
+
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+        context['latest_posts'] = self.latest_posts()
+        context['hottest_posts'] = self.hottest_posts()
+        return context
+
+
+
 
 
 class BlogPage(Page):

@@ -1,25 +1,15 @@
+{% extends "base.html" %}
+
 {% load static from staticfiles %}
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="copyright" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title></title>
-<link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
+{% load wagtailimages_tags %}
+
 {#<link href="{% static "/css/style.css" rel="stylesheet" type="text/css" media="all">#}
-<link href="{% static "common/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static "postpage/css/detail.css" %}" rel="stylesheet" type="text/css" media="all">
-<script src="{% static "common/js/jquery-3.1.0.min.js" %}"></script>
-<script>
-  $(function(){$.fn.scrollToTop=function(){$(this).hide().removeAttr("href");if($(window).scrollTop()!="0"){$(this).fadeIn("")}var scrollDiv=$(this);$(window).scroll(function(){if($(window).scrollTop()=="0"){$(scrollDiv).fadeOut("")}else{$(scrollDiv).fadeIn("")}});$(this).click(function(){$("html, body").animate({scrollTop:0},"")})}});$(function(){$("#back_to_top").scrollToTop();});
-</script>
-</head>
-<body>
+{% block extra_css %}
+    <link href="{% static "postpage/css/detail.css" %}" rel="stylesheet" type="text/css" media="all">
+{% endblock extra_css %}
+
+{% block content %}
 <div class="container border">
   <div class="logo_areas clearfix">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
@@ -36,101 +26,57 @@
   <div id="wrapper" class="clearfix">
     <div id="article" class="clearfix">
       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <h1 class="title">神人精闢解釋「所謂公主根本是辛苦的妓女」，想當公主的人看到最後才清醒自己根本是…</h1>
+        <h1 class="title">{{ page.title }}</h1>
         <div class="author_post clearfix">
-          <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> 2016-07-30 </div>
-          <div class="user"><span class="glyphicon glyphicon-user"></span> Hazel </div>
+          <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> {{ page.date }} </div>
+          <div class="user"><span class="glyphicon glyphicon-user"></span> {{ page.owner }} </div>
         <!-- /.author_post --></div>
         <div id="content">
-          <p><span>長知識了！（誤）</span></p>
-          <p>每個女人都希望有男人可以把自己當成公主般來疼愛，但事實上，真正的「公主」是大家所想的那麼幸福嗎？網友畢靜翰就有一個非常獨到的看法，他認為，現代社會中常見的「公主病」其實是一種誤解，因為它根本不符合一位公主的生活模式，而是更像「小三」！</p>
-          <p class="text-center">▼為什麼畢靜翰會這樣說呢？這一切就要從傳統歐洲史上真正的「公主」開始說起了。</p>
-          <p><img class="center-block img-responsive img-rounded" src="img/img-1.jpg"></p>
-          <p>顧名思義，這裡指的「公主」就是國王的女兒，然而，許多人都把公主誤解為一個很幸福、萬千寵愛於一身的身份。事實上，現實生活中的公主需要應付許多皇室家庭與朝廷的政治問題。再來，公主其實也面對許多的生活壓力，為了保持舉止端莊，她們時時刻刻都必須壓抑和克制自己，不能像一般人那樣蹦蹦跳跳，甚至連去逛夜市的自由和權力都沒有。</p>
-          <p>每一天，公主都必須出席許多複雜的場合，她們就像是皇室所派出的公關代表，被迫與外國和本地的重要人物進行互動，隨時可能還因為不小心說錯一句話，就把歷年來外交活動上所建立下來的良好關係摧毀。</p>
-          <p>畢靜翰生動地作出了比喻，透露真正的公主一點也不好當，因為她們每日的行程和任務可能比國王還要繁忙，但是實際上能夠做決定的事，卻比民間的漁夫太太還要少，所以公主其實肩負的責任比起獲得的樂趣高出許多。</p>
-          <p class="text-center">▼為什麼畢靜翰會這樣說呢？這一切就要從傳統歐洲史上真正的「公主」開始說起了。</p>
-          <p><img class="center-block img-responsive img-rounded" src="img/img-2.jpg"></p>
+            {% for block in page.body %}
+            <section>
+                {% if block.block_type == "heading" %}
+                    <p class="post-heading text-center">{{ block.value }}</p>
+                {% elif block.block_type == "paragraph" %}
+                    <p class="post-paragraph">{{ block.value }}</p>
+                {% elif block.block_type == "image" %}
+                    <p class="post-image-cover">{% image block.value width-1200 class="center-block img-responsive img-rounded" %}</p>
+                {% elif block.block_type == "media" %}
+                    <p class="post-media">{{ block.value }}</p>
+                {% else %}
+                {% endif %}
+            </section>
+            {% endfor %}
         <!-- /#content --></div>
         <div id="host_news">
           <h2 class="text-center title"><span class="glyphicon glyphicon-fire"></span> 最近熱門文章</h2>
           <div class="block_news clearfix">
+              {% for post in hottest_posts %}
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
               <div class="thumbnail">
-                <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-3.jpg"></a>
+                  <a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="img-responsive img-rounded center-block right_image"%}</a>
                 <div class="caption">
-                  <h3 class="article"><a class="article" href="#">她在24年前「幼稚園火燒車」意外不顧自己衝進火海救幼童，結果當年的人至今都無法忘記她…</a></h3>
+                    <h3 class="article"><a class="article" href="{{ post.url }}" target="_blank">{{ post.title }}</a></h3>
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
-              <div class="thumbnail">
-                <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-4.jpg"></a>
-                <div class="caption">
-                  <h3 class="article"><a class="article" href="#">結帳等到不耐煩的婦人失控在現場辱罵唐氏症員工，但她接著的遭遇讓大家都大聲叫好！</a></h3>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
-              <div class="thumbnail">
-                <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-3.jpg"></a>
-                <div class="caption">
-                  <h3 class="article"><a class="article" href="#">她在24年前「幼稚園火燒車」意外不顧自己衝進火海救幼童，結果當年的人至今都無法忘記她…</a></h3>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
-              <div class="thumbnail">
-                <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-4.jpg"></a>
-                <div class="caption">
-                  <h3 class="article"><a class="article" href="#">結帳等到不耐煩的婦人失控在現場辱罵唐氏症員工，但她接著的遭遇讓大家都大聲叫好！</a></h3>
-                </div>
-              </div>
-            </div>
+              {% endfor %}
           <!-- /.block_news --></div>
         <!-- /#host_news --></div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="right">
         <div id="news_list">
           <h2 class="text-center title"><span class="glyphicon glyphicon-flash"></span> 最新文章</h2>
+          {% for post in latest_posts %}
           <div class="thumbnail">
-            <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-5.jpg"></a>
+            <a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="img-responsive img-rounded center-block right_image"%}</a>
             <div class="caption">
-              <h3 class="article"><a class="article" href="#">藍衣小男孩超興奮地玩著聽音樂拍拍手遊戲，當音樂一停下來…他的笑聲把大家都治癒了！</a></h3>
-            </div>
-          </div>  
-          <div class="thumbnail">
-            <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-5.jpg"></a>
-            <div class="caption">
-              <h3 class="article"><a class="article" href="#">藍衣小男孩超興奮地玩著聽音樂拍拍手遊戲，當音樂一停下來…他的笑聲把大家都治癒了！</a></h3>
+                <h3 class="article"><a class="article" href="{{ post.url }}" target="_blank">{{ post.title }}</a></h3>
             </div>
           </div>
-          <div class="thumbnail">
-            <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-5.jpg"></a>
-            <div class="caption">
-              <h3 class="article"><a class="article" href="#">藍衣小男孩超興奮地玩著聽音樂拍拍手遊戲，當音樂一停下來…他的笑聲把大家都治癒了！</a></h3>
-            </div>
-          </div> 
-          <div class="thumbnail">
-            <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-5.jpg"></a>
-            <div class="caption">
-              <h3 class="article"><a class="article" href="#">藍衣小男孩超興奮地玩著聽音樂拍拍手遊戲，當音樂一停下來…他的笑聲把大家都治癒了！</a></h3>
-            </div>
-          </div> 
-          <div class="thumbnail">
-            <a href="#"><img class="img-responsive img-rounded center-block right_image" src="img/img-5.jpg"></a>
-            <div class="caption">
-              <h3 class="article"><a class="article" href="#">藍衣小男孩超興奮地玩著聽音樂拍拍手遊戲，當音樂一停下來…他的笑聲把大家都治癒了！</a></h3>
-            </div>
-          </div>  
+          {% endfor %}
         <!-- /#news_list --></div>
       <!-- /#right --></div>
     <!-- /#article --></div> 
   <!-- /#wrapper --></div>
-  <div id="footer">
-    <div id="copyright">COPYRIGHT © 2016 boMb01. ALL RIGHTS RESERVED.</div>
-  <!-- /#footer --></div>
-  <a id="back_to_top" title="回頁頂" style="display: inline;"></a>
 <!-- /.container --></div>
-</body>
-</html>
+{% endblock content %}

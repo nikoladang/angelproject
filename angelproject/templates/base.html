@@ -24,12 +24,16 @@
         <script src="{% static "common/js/jquery-3.1.0.min.js" %}"></script>
         <link href="{% static "common/css/index.css" %}" rel="stylesheet" type="text/css" media="all">
 
+        <script>
+          $(function(){$.fn.scrollToTop=function(){$(this).hide().removeAttr("href");if($(window).scrollTop()!="0"){$(this).fadeIn("")}var scrollDiv=$(this);$(window).scroll(function(){if($(window).scrollTop()=="0"){$(scrollDiv).fadeOut("")}else{$(scrollDiv).fadeIn("")}});$(this).click(function(){$("html, body").animate({scrollTop:0},"")})}});$(function(){$("#back_to_top").scrollToTop();});
+        </script>
+
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
 
         {% block extra_head %}
-            {# Override this in templates to add extra stylesheets #}
+
         {% endblock %}
     </head>
 
