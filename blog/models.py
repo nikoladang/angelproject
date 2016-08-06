@@ -94,10 +94,12 @@ class PostPage(Page):
 
     parent_page_types = ['blog.PostIndexPage']
 
+    api_fields = ('title', 'post_cover', 'date', 'author', 'hot','intro', 'body', 'note')
+
     def latest_posts(self):
         postindexpage = PostIndexPage.objects.all().last()
         # posts = PostPage.objects.live().descendant_of(postindexpage)
-        posts = PostPage.objects.child_of(postindexpage)
+        posts = PostPage.objects.child_of(postindexpage).public().live()
         posts = posts.order_by("-date")
         posts = posts[:6]
         return posts
@@ -143,6 +145,7 @@ class BlogPage(Page):
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
     ]
+
 
 
 class StreamBlogPage(Page):

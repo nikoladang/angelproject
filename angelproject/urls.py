@@ -19,9 +19,9 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
 
-    url(r'', include(wagtail_urls)),
+    url(r'^api/', include(wagtailapi_urls)),
 
-    url(r'^api/', include(wagtailapi_urls))
+    url(r'', include(wagtail_urls)),
 ]
 
 
