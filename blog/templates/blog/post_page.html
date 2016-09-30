@@ -28,7 +28,7 @@
       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <h1 class="title">{{ page.title }}</h1>
         <div class="author_post clearfix">
-          <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> {{ page.date }} </div>
+          <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> {{ page.date | date:"D Y-m-d G:i" }} </div>
           <div class="user"><span class="glyphicon glyphicon-user"></span> {{ page.owner }} </div>
         <!-- /.author_post --></div>
         <div id="content">
@@ -48,7 +48,7 @@
             {% endfor %}
         <!-- /#content --></div>
         <div id="host_news">
-          <h2 class="text-center title"><span class="glyphicon glyphicon-fire"></span> 最近熱門文章</h2>
+          <h2 class="text-center title"><span class="glyphicon glyphicon-fire"></span> TRENDING ARTICLES</h2>
           <div class="block_news clearfix">
               {% for post in hottest_posts %}
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
@@ -65,7 +65,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="right">
         <div id="news_list">
-          <h2 class="text-center title"><span class="glyphicon glyphicon-flash"></span> 最新文章</h2>
+          <h2 class="text-center title"><span class="glyphicon glyphicon-flash"></span> MOST RECENT</h2>
           {% for post in latest_posts %}
           <div class="thumbnail">
             <a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="img-responsive img-rounded center-block right_image"%}</a>
