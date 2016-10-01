@@ -38,15 +38,11 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+{#        {% wagtailuserbar %}#}
 
         {% block content %}{% endblock %}
 
 
-      <div id="footer">
-        <div id="copyright">COPYRIGHT © 2016. ALL RIGHTS RESERVED.</div>
-      <!-- /#footer --></div>
-      <a id="back_to_top" title="回頁頂" style="display: inline;"></a>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'common/js/angelproject.js' %}"></script>
