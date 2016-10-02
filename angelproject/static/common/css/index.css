@@ -108,10 +108,10 @@ p {
   width: 100%;
   margin: 10px 0;
 }
-.right_image {
-  max-width: 336px;
-  max-height: 280px;
-}
+/*.right_image {*/
+  /*max-width: 336px;*/
+  /*max-height: 280px;*/
+/*}*/
 .line {
   border-top: 1px dotted #ccc;
   margin: 0px auto 0px auto;
@@ -281,3 +281,21 @@ a.tag:hover {
 }
 /*  小見出し
 ----------------------------------------*/
+
+/*  Split text
+----------------------------------------*/
+.article_txt {
+  width: 100%;
+  overflow: hidden;
+  font-size: 117%;
+  display: block;
+/*  height: 48px;*/
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+}
+
+.right_image {
+  width: 100%;
+}

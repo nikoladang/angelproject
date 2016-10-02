@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -26,14 +28,14 @@ class PostIndexPage(Page):
         # posts_index = PostIndexPage.objects.all().last()
         # print(posts_index.get_children())
         posts = PostPage.objects.live().descendant_of(self)
-        posts = posts.order_by("-date")
+        posts = posts.order_by("-create_date")
         print(posts)
         return posts
 
 
     def post_paginator(self, pagenumber):
         posts = PostPage.objects.live().descendant_of(self)
-        posts = posts.order_by("-date")
+        posts = posts.order_by("-create_date")
         paginator = Paginator(posts, 6)
         # pagin_posts = paginator.page(1)
         # print(pagin_posts)
@@ -71,7 +73,8 @@ class PostPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    date = models.DateTimeField("Post date")
+    # date = models.DateTimeField("Post date", default=datetime.now())
+    create_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=255)
     # hot = models.NullBooleanField(blank=True, null=True)
     hot = models.BooleanField(default=False)
@@ -85,7 +88,7 @@ class PostPage(Page):
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('post_cover'),
-        FieldPanel('date'),
+        # FieldPanel('date'),
         FieldPanel('author'),
         FieldPanel('hot'),
         StreamFieldPanel('body'),
@@ -94,28 +97,33 @@ class PostPage(Page):
 
     parent_page_types = ['blog.PostIndexPage']
 
-    api_fields = ('title', 'post_cover', 'date', 'author', 'hot','intro', 'body', 'note')
+    api_fields = ('title', 'post_cover', 'create_date', 'author', 'hot','intro', 'body', 'note')
 
     def latest_posts(self):
         postindexpage = PostIndexPage.objects.all().last()
         # posts = PostPage.objects.live().descendant_of(postindexpage)
         posts = PostPage.objects.child_of(postindexpage).public().live()
-        posts = posts.order_by("-date")
+        posts = posts.order_by("-create_date")
         posts = posts[:6]
         return posts
 
 
     def hottest_posts(self):
         posts = PostPage.objects.live().public().filter(hot=True)
-        posts = posts.order_by("-date")
+        posts = posts.order_by("-create_date")
         posts = posts[:4]
         return posts
 
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request)
+        print(context)
         context['latest_posts'] = self.latest_posts()
         context['hottest_posts'] = self.hottest_posts()
+        context['previous_post'] = self.get_prev_sibling()
+        print(request.user)
+        # print(self.get_next_sibling().url_path)
+        # print(self.get_prev_sibling().url_path)
         return context
 
 

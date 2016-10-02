@@ -50,3 +50,40 @@ a.next_article:focus {
 #news_list .title {
   margin-bottom: 20px;
 }
+
+/*  Facebook share
+----------------------------------------*/
+.buttons-block {
+  overflow: hidden;
+}
+.facebook_share {
+  margin: 30px 0 20px;
+}
+.facebook_share a.share_on_facebook {
+  background-color: #3b5998;
+  color: #fff;
+  padding: 10px 0px 10px 0px;
+  font-family: "Microsoft JhengHei",arial,sans-serif;
+  display: block;
+}
+.facebook_share a.share_on_facebook img {
+    padding: 0px 10px 2px 0px;
+}
+
+/*  Split text
+----------------------------------------*/
+.article_txt {
+  width: 100%;
+  overflow: hidden;
+  font-size: 117%;
+  display: block;
+/*  height: 48px;*/
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+}
+
+.right_image {
+  width: 100%;
+}

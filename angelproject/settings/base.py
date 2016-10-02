@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'blog',
     'wagtail.contrib.wagtailapi',
     'rest_framework',
+    'dashboard',
 ]
 
 MIDDLEWARE_CLASSES = [
