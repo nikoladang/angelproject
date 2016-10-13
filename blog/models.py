@@ -14,6 +14,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from .constants import POSTPAGE_CATEGORIES
 
 class PostIndexPage(Page):
     note = RichTextField(blank=True)
@@ -66,6 +67,8 @@ class PostIndexPage(Page):
 
 
 class PostPage(Page):
+    CATEGORIES = POSTPAGE_CATEGORIES
+
     post_cover = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -73,6 +76,7 @@ class PostPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    category = models.CharField(max_length=255, choices=CATEGORIES)
     # date = models.DateTimeField("Post date", default=datetime.now())
     create_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=255)
@@ -89,6 +93,7 @@ class PostPage(Page):
     content_panels = Page.content_panels + [
         ImageChooserPanel('post_cover'),
         # FieldPanel('date'),
+        FieldPanel('category'),
         FieldPanel('author'),
         FieldPanel('hot'),
         StreamFieldPanel('body'),

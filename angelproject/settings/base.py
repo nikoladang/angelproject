@@ -44,6 +44,7 @@ def get_secret(setting, secrets=secrets):
 INSTALLED_APPS = [
     'home',
     'search',
+    'dashboard',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -70,7 +71,6 @@ INSTALLED_APPS = [
     'blog',
     'wagtail.contrib.wagtailapi',
     'rest_framework',
-    'dashboard',
 ]
 
 MIDDLEWARE_CLASSES = [
