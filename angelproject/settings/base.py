@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'django_user_agents',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +72,8 @@ INSTALLED_APPS = [
     'blog',
     'wagtail.contrib.wagtailapi',
     'rest_framework',
+    'shortener',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -85,6 +88,7 @@ MIDDLEWARE_CLASSES = [
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'angelproject.urls'
@@ -171,3 +175,16 @@ WAGTAIL_SITE_NAME = "angelproject"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+
+# Cache backend is optional, but recommended to speed up user agent parsing
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+# Name of cache backend to cache user agents. If it not specified default
+# cache alias will be used. Set to `None` to disable caching.
+USER_AGENTS_CACHE = 'default'
