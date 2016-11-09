@@ -27,6 +27,7 @@ urlpatterns = [
     #     namespace='shortener')),
 
     url(r'^api/', include(wagtailapi_urls)),
+    url(r'^iprestrict/', include('iprestrict.urls', namespace='iprestrict')),
 
     url(r'', include(wagtail_urls)),
 ]

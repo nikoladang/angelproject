@@ -9,8 +9,8 @@ INSTALLED_APPS += ("debug_toolbar", )
 
 MIDDLEWARE_CLASSES += ("debug_toolbar.middleware.DebugToolbarMiddleware", )
 
-STATIC_ROOT = "/Users/loannguyen/.virtualenv/dailyhn/static_in_env"
-MEDIA_ROOT = "/Users/loannguyen/.virtualenv/dailyhn/media_in_env"
+STATIC_ROOT = "/Users/loannguyen/.virtualenv/nikolad/static_in_env"
+MEDIA_ROOT = "/Users/loannguyen/.virtualenv/nikolad/media_in_env"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret("SECRET_KEY_LOCAL")

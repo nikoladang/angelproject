@@ -5,11 +5,13 @@ from .models import Urls
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 
+
 def index(request):
     # c = {}
     # c.update(csrf(request))
     # return render_to_response('shortenersite/index.html', c)
     pass
+
 
 def redirect_original(request, short_id):
     # https://docs.djangoproject.com/en/1.10/ref/request-response/

@@ -60,7 +60,6 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
-    'django_user_agents',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,6 +67,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_user_agents',
+    'templatetag_handlebars',
+    'iprestrict',
+    'import_export',
 
     'blog',
     'wagtail.contrib.wagtailapi',
@@ -77,6 +81,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'iprestrict.middleware.IPRestrictMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -188,3 +193,6 @@ CACHES = {
 # Name of cache backend to cache user agents. If it not specified default
 # cache alias will be used. Set to `None` to disable caching.
 USER_AGENTS_CACHE = 'default'
+
+# iprestrict
+GEOIP_PATH = BASE_DIR + '/data/geoip'
