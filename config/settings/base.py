@@ -196,3 +196,4 @@ USER_AGENTS_CACHE = 'default'
 
 # iprestrict
 GEOIP_PATH = BASE_DIR + '/data/geoip'
+IPRESTRICT_GEOIP_ENABLED = False
