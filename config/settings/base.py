@@ -70,7 +70,7 @@ INSTALLED_APPS = [
 
     'django_user_agents',
     'templatetag_handlebars',
-    'iprestrict',
+    # 'iprestrict',
     'import_export',
 
     'blog',
@@ -81,7 +81,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
-    'iprestrict.middleware.IPRestrictMiddleware',
+    # 'iprestrict.middleware.IPRestrictMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -195,6 +195,7 @@ CACHES = {
 # cache alias will be used. Set to `None` to disable caching.
 USER_AGENTS_CACHE = 'default'
 
-# iprestrict
-GEOIP_PATH = BASE_DIR + '/data/geoip'
-IPRESTRICT_GEOIP_ENABLED = False
+# # iprestrict
+# GEOIP_PATH = BASE_DIR + '/data/geoip'
+# IPRESTRICT_GEOIP_ENABLED = False
+# IPRESTRICT_RELOAD_RULES = False
