@@ -73,7 +73,8 @@ INSTALLED_APPS = [
     # 'iprestrict',
     'import_export',
 
-    'blog',
+    # 'blog',
+    'post',
     'wagtail.contrib.wagtailapi',
     'rest_framework',
     'shortener',
@@ -170,7 +171,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media2')
 MEDIA_URL = '/media/'
 
 
@@ -196,6 +197,6 @@ CACHES = {
 USER_AGENTS_CACHE = 'default'
 
 # # iprestrict
-GEOIP_PATH = BASE_DIR + '/data/geoip'
+# GEOIP_PATH = BASE_DIR + '/data/geoip'
 # IPRESTRICT_GEOIP_ENABLED = False
 # IPRESTRICT_RELOAD_RULES = False

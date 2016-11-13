@@ -1,0 +1,95 @@
+{% extends "blog/base.html" %}
+
+{% load static from staticfiles %}
+
+{% load wagtailimages_tags %}
+
+{#<link href="{% static "/css/style.css" rel="stylesheet" type="text/css" media="all">#}
+{% block extra_css %}
+    <link href="{% static "postpage/css/detail.css" %}" rel="stylesheet" type="text/css" media="all">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container border">
+  <div class="logo_areas clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+      <div id="logo">
+        <a href="/"><img class="center_block img-responsive" src="{% static "common/img/logo.png" %}"></a>
+      <!-- /#logo --></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+      <div class="text-center hidden-xs">
+        <img class="adv" src="{% static "common/img/img-ad.png" %}">
+      <!-- /.text-center --></div>
+    </div>
+  <!-- /.logo_areas --></div>
+  <div id="wrapper" class="clearfix">
+    <div id="article" class="clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <h1 class="title">{{ page.title }}</h1>
+        <div class="author_post clearfix">
+          <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> {{ page.create_date | date:"D Y-m-d G:i" }} </div>
+          <div class="user"><span class="glyphicon glyphicon-user"></span> {{ page.owner }} </div>
+        <!-- /.author_post --></div>
+        <div id="content">
+            {% for block in page.body %}
+            <section>
+                {% if block.block_type == "heading" %}
+                    <p class="post-heading text-center">{{ block.value }}</p>
+                {% elif block.block_type == "paragraph" %}
+                    <p class="post-paragraph">{{ block.value }}</p>
+                {% elif block.block_type == "image" %}
+                    <p class="post-image-cover">{% image block.value width-1200 class="center-block img-responsive img-rounded" %}</p>
+                {% elif block.block_type == "media" %}
+                    <p class="post-media">{{ block.value }}</p>
+                {% else %}
+                {% endif %}
+            </section>
+            {% endfor %}
+        <!-- /#content --></div>
+      <div class="buttons-block">
+        <div class="col-sm-12">
+          <div class="facebook_share">
+            <a class="btn btn-lg btn-block btn-facebook center-block share_on_facebook" role="button" onclick="javascript:facebook_sharer=window.open('https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/loan.nguyen.31542841/posts/1411011958927766', 'facebook_share', 'height=320, width=640, directories=no, location=no, menubar=no, resizable=no, scrollbars=no, status=no, toolbar=no')"><img src="{% static "common/img/f_logo2.png" %}">Please share this if you like!!!</a>
+          <!-- /.facebook_share --></div>
+        </div>
+        <div class="col-sm-12">
+          <div class="next_page">
+            <a class="btn btn-lg btn-block center-block next_article" href="#" role="button">Next Article<span class="glyphicon glyphicon-chevron-right"></span></a>
+          <!-- /.next_page --></div>
+      </div>
+      </div>
+        <div id="host_news">
+          <h2 class="text-center title"><span class="glyphicon glyphicon-fire"></span> TRENDING ARTICLES</h2>
+          <div class="block_news clearfix">
+              {% for post in hottest_posts %}
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin10">
+              <div class="thumbnail">
+                  <a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="img-responsive img-rounded center-block right_image"%}</a>
+                <div class="caption">
+                    <h3 class="article"><a class="article article_txt" href="{{ post.url }}" target="_blank">{{ post.title }}</a></h3>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+          <!-- /.block_news --></div>
+        <!-- /#host_news --></div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="right">
+        <div id="news_list">
+          <h2 class="text-center title"><span class="glyphicon glyphicon-flash"></span> MOST RECENT</h2>
+          {% for post in latest_posts %}
+          <div class="thumbnail">
+            <a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="img-responsive img-rounded center-block right_image"%}</a>
+            <div class="caption">
+                <h3 class="article"><a class="article article_txt" href="{{ post.url }}" target="_blank">{{ post.title }}</a></h3>
+            </div>
+          </div>
+          {% endfor %}
+        <!-- /#news_list --></div>
+      <!-- /#right --></div>
+    <!-- /#article --></div>
+  <!-- /#wrapper --></div>
+      {% include "blog/includes/footer.html" %}
+<!-- /.container --></div>
+{% endblock content %}

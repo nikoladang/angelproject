@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/*----------------------------------------
+    大見出し
+----------------------------------------*/
+#content {
+    margin-top: 20px;
+}
+#content p,
+#content b,
+#content ul,
+#content li {
+  font-family: "Microsoft JhengHei", arial, sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.author_post {
+  margin-top: 20px;
+  width: 100%;
+  display: block;
+}
+
+a.next_article,
+a.next_article:active,
+a.next_article:hover,
+a.next_article:focus {
+    background: #ff9138;
+    background: -moz-linear-gradient(top, #ff9138 0%, #e47220 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff9138), color-stop(100%, #e47220));
+    background: -webkit-linear-gradient(top, #ff9138 0%, #e47220 100%);
+    background: -o-linear-gradient(top, #ff9138 0%, #e47220 100%);
+    background: -ms-linear-gradient(top, #ff9138 0%, #e47220 100%);
+    background: linear-gradient(to bottom, #ff9138 0%, #e47220 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff9138', endColorstr='#e47220', GradientType=0);
+    border-color: #ff9138;
+    color: #fff;
+    padding: 10px 0px 5px 0px;
+    font-family: "Microsoft JhengHei", arial, sans-serif;
+}
+#host_news {
+  margin-top: 60px;
+}
+#host_news .title {
+  margin-bottom: 20px;
+}
+#news_list {
+  margin: 20px 0;
+}
+#news_list .title {
+  margin-bottom: 20px;
+}
+
+/*  Facebook share
+----------------------------------------*/
+.buttons-block {
+  overflow: hidden;
+}
+.facebook_share {
+  margin: 30px 0 20px;
+}
+.facebook_share a.share_on_facebook {
+  background-color: #3b5998;
+  color: #fff;
+  padding: 10px 0px 10px 0px;
+  font-family: "Microsoft JhengHei",arial,sans-serif;
+  display: block;
+}
+.facebook_share a.share_on_facebook img {
+    padding: 0px 10px 2px 0px;
+}
+
+/*  Split text
+----------------------------------------*/
+.article_txt {
+  width: 100%;
+  overflow: hidden;
+  font-size: 117%;
+  display: block;
+/*  height: 48px;*/
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+}
+
+.right_image {
+  width: 100%;
+}

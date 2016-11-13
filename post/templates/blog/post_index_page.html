@@ -1,0 +1,63 @@
+{% extends "blog/base.html" %}
+
+{% load static from staticfiles %}
+
+{% load wagtailimages_tags%}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<div class="container border">
+  <div class="logo_areas clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+      <div id="logo">
+        <a href="/"><img class="center_block img-responsive" src="{% static "common/img/logo.png" %}"></a>
+      <!-- /#logo --></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+      <div class="text-center hidden-xs">
+        <img class="adv" src="{% static "common/img/img-ad.png" %}">
+      <!-- /.text-center --></div>
+    </div>
+  <!-- /.logo_areas --></div>
+  <div id="wrapper">
+    <div class="toppic_path clearfix">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <ol class="breadcrumb">
+          <li><a href="#"><span class="glyphicon glyphicon-flash"></span> MOST RECENT</a></li>
+        </ol>
+      </div>
+    <!-- /.toppic_path --></div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% for post in paginated_posts %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <p class="photo"><a href="{{ post.url }}" target="_blank">{% image post.post_cover width-400 class="center_block img-responsive img-rounded"%}</a></p>
+            <h2 class="grid margin20"><a href="{{ post.url }}" target="_blank" class="article_txt">{{ post.title }}</a></h2>
+            <div class="time pull-left"><span class="glyphicon glyphicon-time"></span> {{ post.create_date | date:"D Y-m-d G:i" }} </div>
+            </br></br>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center">
+        <div class="pagination btn-group">
+            <span class="step-links">
+                {% if paginated_posts.has_previous %}
+{#                    <a href="?page={{ paginated_posts.previous_page_number }}">PREVIOUS <i class="fa fa-align-left" title="Align Left"></i></a>#}
+                    <a class="btn btn-default" href="?page={{ paginated_posts.previous_page_number }}">PREVIOUS</a>
+                {% endif %}
+                <span class="current">
+                    {{ paginated_posts.number }} of {{ paginated_posts.paginator.num_pages }}
+                </span>
+                {% if paginated_posts.has_next %}
+                    <a class="btn btn-default" href="?page={{ paginated_posts.next_page_number }}">NEXT</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+  <!-- /#wrapper --></div>
+  {% include "blog/includes/footer.html" %}
+<!-- /.container --></div>
+{% endblock content %}
