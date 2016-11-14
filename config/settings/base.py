@@ -94,7 +94,7 @@ MIDDLEWARE_CLASSES = [
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-    'django_user_agents.middleware.UserAgentMiddleware',
+    # 'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -141,6 +141,7 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ["localhost"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
