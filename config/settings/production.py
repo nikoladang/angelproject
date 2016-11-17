@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS += ("www.nikolad.com","nikolad.com")
+ALLOWED_HOSTS += ("www.nikolad.com","nikolad.com",)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "../staticfiles")
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media")

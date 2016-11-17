@@ -141,7 +141,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost",]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
