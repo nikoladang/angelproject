@@ -11,8 +11,12 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
 
+from shortener import views as shortener_views
+
 urlpatterns = [
     # url(r'^s/', include('shortener.urls')),
+
+    url(r'^googlee61d09ae5cc87100\.html', shortener_views.draft),
 
     url(r'^django-admin/', include(admin.site.urls)),
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 import random, string, json
 from .models import Urls
 from django.http import HttpResponseRedirect, HttpResponse
@@ -54,3 +54,6 @@ def get_short_code():
             temp = Urls.objects.get(pk=short_id)
         except:
             return short_id
+
+def draft(request):
+    return redirect('http://www.nikolad.com/static/googlee61d09ae5cc87100.html')
