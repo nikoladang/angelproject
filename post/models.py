@@ -37,7 +37,7 @@ class PostIndexPage(Page):
     def post_paginator(self, pagenumber):
         posts = PostPage.objects.live().descendant_of(self)
         posts = posts.order_by("-create_date")
-        paginator = Paginator(posts, 6)
+        paginator = Paginator(posts, 12)
         # pagin_posts = paginator.page(1)
         # print(pagin_posts)
         # if pagin_posts.has_previous():
@@ -83,8 +83,8 @@ class PostPage(Page):
     # hot = models.NullBooleanField(blank=True, null=True)
     hot = models.BooleanField(default=False)
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
+        ('heading', blocks.CharBlock(classname="full title")),
         ('image', ImageChooserBlock()),
         ('media', EmbedBlock())
     ])
