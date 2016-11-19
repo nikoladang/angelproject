@@ -5,7 +5,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS += ("192.168.1.103", )
+ALLOWED_HOSTS += ("192.168.1.103", "192.168.1.111", )
 
 INSTALLED_APPS += ("debug_toolbar", )
 
