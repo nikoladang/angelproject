@@ -21,7 +21,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # JSON-based secrets module
-with open(os.path.join(BASE_DIR, "secrets.json")) as f:
+with open(os.path.join(BASE_DIR, "private/secrets.json")) as f:
     secrets = json.loads(f.read())
 
 def get_secret(setting, secrets=secrets):
@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     'templatetag_handlebars',
     # 'iprestrict',
     'import_export',
+    'wagalytics',
+    'wagtailfontawesome',
 
     # 'blog',
     'post',
@@ -202,3 +204,7 @@ USER_AGENTS_CACHE = 'default'
 # GEOIP_PATH = BASE_DIR + '/data/geoip'
 # IPRESTRICT_GEOIP_ENABLED = False
 # IPRESTRICT_RELOAD_RULES = False
+
+# wagalytics
+GA_KEY_FILEPATH = os.path.join(BASE_DIR, "private/Nikolad-3c4e9d3f3feb.json")
+GA_VIEW_ID = 'ga:UA-87979715-1'
