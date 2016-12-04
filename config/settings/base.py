@@ -73,8 +73,8 @@ INSTALLED_APPS = [
     'templatetag_handlebars',
     # 'iprestrict',
     'import_export',
-    'wagalytics',
-    'wagtailfontawesome',
+    # 'wagalytics',
+    # 'wagtailfontawesome',
 
     # 'blog',
     'post',
@@ -205,6 +205,6 @@ USER_AGENTS_CACHE = 'default'
 # IPRESTRICT_GEOIP_ENABLED = False
 # IPRESTRICT_RELOAD_RULES = False
 
-# wagalytics
-GA_KEY_FILEPATH = os.path.join(BASE_DIR, "private/Nikolad-3c4e9d3f3feb.json")
-GA_VIEW_ID = 'ga:UA-87979715-1'
+# # wagalytics
+# GA_KEY_FILEPATH = os.path.join(BASE_DIR, "private/Nikolad-3c4e9d3f3feb.json")
+# GA_VIEW_ID = 'ga:UA-87979715-1'
