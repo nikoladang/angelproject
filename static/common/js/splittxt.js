@@ -3,8 +3,16 @@
 
   var Split = $.split = (function(){
 
+    var i = 0,
+      $item,
+      itemLen = 0,
+      rows = 2,
+      setItemColumn;
+
+
     function init(){
       countTxt();
+      setHeight();
     }
 
     function countTxt() {
@@ -27,6 +35,34 @@
       });
 
     }
+
+    // set height colum
+    function setHeight() {
+      var $itemList = $('#wrapper');
+      $(window).on("load resize", function(){
+        $itemList.each(function() {
+          $item = $(this).find('.col-lg-4');
+          itemLen = $item.length;
+          $item.css("height","auto");
+          for( var i = -1, len = Math.ceil( itemLen / rows); ++ i < len; ){
+            var itemArray = [];
+            for(var j = -1; ++ j < rows;){
+              itemArray.push( i * rows + j );
+            }
+            setItemColumn(itemArray);
+          }
+        });
+      });
+    }
+    setItemColumn = function(itemNum){
+      var itemMaxHeight = 0;
+      for( var i = 0; i < itemNum.length; i++){
+        itemMaxHeight = $item.eq(itemNum[i]).height() > itemMaxHeight ? $item.eq(itemNum[i]).height() : itemMaxHeight;
+      }
+      for(i = 0; i < itemNum.length; i++){
+        $item.eq(itemNum[i]).height(itemMaxHeight);
+      }
+    };
 
     return {
       init: init
